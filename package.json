@@ -1,0 +1,26 @@
+{
+  "name": "miaoli-people",
+  "version": "1.0.0",
+  "description": "Parsing miaoli people",
+  "main": "js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Casper Lai",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^5.5.0",
+    "babel-loader": "^5.1.3",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-webpack": "^1.4.0",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.10"
+  },
+  "dependencies": {
+    "jq-html-parser": "^0.3.0",
+    "jquery": "^2.1.4",
+    "request": "^2.57.0",
+    "underscore": "^1.8.3"
+  }
+}
