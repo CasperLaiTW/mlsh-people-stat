@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
-    webpack = require('gulp-webpack'),
-    connect =require('gulp-connect');
+    webpack = require('gulp-webpack')
 
 
 gulp.task('build', function () {
@@ -9,11 +8,8 @@ gulp.task('build', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('connect', function () {
-    connect.server({
-        root: 'public',
-        livereload: true
-    })
+gulp.task('watch', function () {
+    gulp.watch(['js/**/*.js', 'index.html'], ['copy']);
 });
 
 gulp.task('copy', ['build'], function () {
@@ -21,4 +17,4 @@ gulp.task('copy', ['build'], function () {
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('default', ['connect', 'copy']);
+gulp.task('default', ['watch', 'copy']);

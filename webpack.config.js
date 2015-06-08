@@ -1,5 +1,5 @@
 module.exports = {
-  watch: true,
+  watch: false,
   outputDir: "dist/js",
   output: {
     filename: 'app.js',

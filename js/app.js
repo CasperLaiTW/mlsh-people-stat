@@ -1,17 +1,13 @@
 import Area from './area';
 import _ from 'underscore';
-
-const map = [
-  {
-    name: '苗栗市',
-    code: 20
-  }
-];
+import $ from 'jquery';
 
 let areas = [];
 
-_.each(map, (value, key) => {
-  let area = new Area(value.name, value.code).load();
-  // console.log(area);
-  // areas.push(area);
+$.get('/stat', (response) => {
+  _.each(response, (value) => {
+    let area = new Area(value.name);
+    area.load(value.people);
+    areas.push(area);
+  });
 });
