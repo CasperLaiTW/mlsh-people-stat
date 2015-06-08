@@ -1,8 +1,12 @@
 import Area from './area';
 import _ from 'underscore';
 import $ from 'jquery';
+import React from 'react';
+import Stat from './stat';
+import 'semantic-ui-css/semantic.min.css';
 
 let areas = [];
+let app = document.getElementById('app');
 
 $.get('/stat', (response) => {
   _.each(response, (value) => {
@@ -10,4 +14,8 @@ $.get('/stat', (response) => {
     area.load(value.people);
     areas.push(area);
   });
+  console.log(areas);
+  React.render(<Stat areas={areas} />, app);
 });
+
+

@@ -23,20 +23,21 @@ var areas = [
   {name: '公館鄉', code: 28},
   {name: '三義鄉', code: 29},
   {name: '銅鑼鄉', code: 30},
-  {name: '銅鑼鄉', code: 30},
   {name: '西湖鄉', code: 31},
   {name: '造橋鄉', code: 32},
   {name: '頭屋鄉', code: 33},
   {name: '三灣鄉', code: 34},
   {name: '獅潭鄉', code: 35},
   {name: '南庄鄉', code: 36},
-  {name: '泰安鄉', code: 36},
+  {name: '泰安鄉', code: 37},
 ];
 app.get('/stat', function (request, response, next) {
   var api = new Api();
   var data = [];
+
   _.each(areas, function (value) {
-    data.push({name: value.name, people: api.load(value.code)});
+    var result = api.load(value.code);
+    data.push({name: value.name, people: result});
   });
   response.json(data);
 });

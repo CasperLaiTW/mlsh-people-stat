@@ -2,33 +2,17 @@ var Q = require('q');
 var request = Q.denodeify(require('request'));
 var Parser = require('jq-html-parser');
 var _ = require('underscore');
-var fs = require('fs');
-var path = require('path');
 
 module.exports = function () {
   var url = 'http://mlhr.miaoli.gov.tw/tables1_print.php?unit=';
 
   var load = function (code) {
-    var json = path.resolve(__dirname, '../people/' + code + '.json');
-    if (fs.exists(json, function(exists) {
-      if (exists) {
-        return local(json);
-      } else {
-        var response = request(url + code);
-        return response.then(function(response) {
-          var result = parser(response[0].body);
-          var str = JSON.stringify(result);
-          fs.writeFile(json, str);
-          return result;
-        });
-      }
-    }));
+    var response = request(url + code);
+    return response.then(function(response) {
+      var result = parser(response[0].body);
+      return result;
+    });
   }
-
-  var local = function (path, callback) {
-    var file = fs.readFileSync(path);
-    return JSON.parse(file);
-  };
 
   var parser = function (body) {
     var config = {
@@ -60,7 +44,7 @@ module.exports = function () {
           value: filter[2],
           percent: filter[3]
         }
-        data.push({value: value, man: man, female: female});
+        data.push({age: value, man: man, female: female});
      });
      return data;
   }
