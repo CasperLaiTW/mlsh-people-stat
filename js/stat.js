@@ -48,7 +48,7 @@ export default class Stat extends React.Component {
       );
     });
 
-    let control = (!this.state.hide ? <a href="#" onClick={this.handleHideAge.bind(this)} className="ui button green">隱藏年齡(複製至Excel)</a> : <a href="#" onClick={this.handleShowAge.bind(this)} className="ui button green">顯示年齡</a> )
+    let control = (!this.state.hide ? <a href="#" onClick={this.handleHideAge.bind(this)} className="ui button green">隱藏年齡(複製至Excel)</a> : <a href="#" onClick={this.handleShowAge.bind(this)} className="ui button green">顯示年齡</a>)
     return (
       <div>
         {control}
