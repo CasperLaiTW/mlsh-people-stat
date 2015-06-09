@@ -12,6 +12,7 @@ app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('express-promise')());
 var areas = [
+  {name: '苗栗縣', code: ''},
   {name: '苗栗市', code: 20},
   {name: '竹南鎮', code: 21},
   {name: '頭份鎮', code: 22},

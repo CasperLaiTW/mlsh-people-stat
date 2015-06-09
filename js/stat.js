@@ -4,6 +4,17 @@ import _ from 'underscore';
 export default class Stat extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hide: false
+    }
+  }
+
+  handleHideAge() {
+    this.setState({hide: true});
+  }
+
+  handleShowAge() {
+    this.setState({hide: false});
   }
 
   render() {
@@ -11,11 +22,10 @@ export default class Stat extends React.Component {
       let data = _.map(this.props.areas, (area) => {
         return _.findWhere(area.people.age, {age: age.age});
       });
+      let ageRow = (this.state.hide ? null : <tr><td rowSpan="4" key={'a'+key}>{age.age}</td></tr>);
       return (
         <tbody>
-          <tr>
-            <td rowSpan="4">{age.age}</td>
-          </tr>
+          {ageRow}
           <tr>
             <td>男</td>
             {data.map((value, index) =>
@@ -38,13 +48,15 @@ export default class Stat extends React.Component {
       );
     });
 
+    let control = (!this.state.hide ? <a href="#" onClick={this.handleHideAge.bind(this)} className="ui button green">隱藏年齡(複製至Excel)</a> : <a href="#" onClick={this.handleShowAge.bind(this)} className="ui button green">顯示年齡</a> )
     return (
       <div>
+        {control}
         <table className="ui compact celled definition table">
           <thead>
               <tr>
                 <th></th>
-                <th></th>
+                {this.state.hide ? null : <th></th>}
                 {this.props.areas.map((area, index) =>
                   <th key={index}>{area.name}</th>
                 )}

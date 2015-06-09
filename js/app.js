@@ -14,7 +14,6 @@ $.get('/stat', (response) => {
     area.load(value.people);
     areas.push(area);
   });
-  console.log(areas);
   React.render(<Stat areas={areas} />, app);
 });
 

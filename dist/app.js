@@ -79,7 +79,6 @@
 	    area.load(value.people);
 	    areas.push(area);
 	  });
-	  console.log(areas);
 	  _react2['default'].render(_react2['default'].createElement(_stat2['default'], { areas: areas }), app);
 	});
 
@@ -31377,11 +31376,24 @@
 	    _classCallCheck(this, Stat);
 
 	    _get(Object.getPrototypeOf(Stat.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      hide: false
+	    };
 	  }
 
 	  _inherits(Stat, _React$Component);
 
 	  _createClass(Stat, [{
+	    key: 'handleHideAge',
+	    value: function handleHideAge() {
+	      this.setState({ hide: true });
+	    }
+	  }, {
+	    key: 'handleShowAge',
+	    value: function handleShowAge() {
+	      this.setState({ hide: false });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this = this;
@@ -31390,18 +31402,19 @@
 	        var data = _underscore2['default'].map(_this.props.areas, function (area) {
 	          return _underscore2['default'].findWhere(area.people.age, { age: age.age });
 	        });
+	        var ageRow = _this.state.hide ? null : _react2['default'].createElement(
+	          'tr',
+	          null,
+	          _react2['default'].createElement(
+	            'td',
+	            { rowSpan: '4', key: 'a' + key },
+	            age.age
+	          )
+	        );
 	        return _react2['default'].createElement(
 	          'tbody',
 	          null,
-	          _react2['default'].createElement(
-	            'tr',
-	            null,
-	            _react2['default'].createElement(
-	              'td',
-	              { rowSpan: '4' },
-	              age.age
-	            )
-	          ),
+	          ageRow,
 	          _react2['default'].createElement(
 	            'tr',
 	            null,
@@ -31453,9 +31466,19 @@
 	        );
 	      });
 
+	      var control = !this.state.hide ? _react2['default'].createElement(
+	        'a',
+	        { href: '#', onClick: this.handleHideAge.bind(this), className: 'ui button green' },
+	        '隱藏年齡(複製至Excel)'
+	      ) : _react2['default'].createElement(
+	        'a',
+	        { href: '#', onClick: this.handleShowAge.bind(this), className: 'ui button green' },
+	        '顯示年齡'
+	      );
 	      return _react2['default'].createElement(
 	        'div',
 	        null,
+	        control,
 	        _react2['default'].createElement(
 	          'table',
 	          { className: 'ui compact celled definition table' },
@@ -31466,7 +31489,7 @@
 	              'tr',
 	              null,
 	              _react2['default'].createElement('th', null),
-	              _react2['default'].createElement('th', null),
+	              this.state.hide ? null : _react2['default'].createElement('th', null),
 	              this.props.areas.map(function (area, index) {
 	                return _react2['default'].createElement(
 	                  'th',
